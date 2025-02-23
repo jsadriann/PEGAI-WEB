@@ -1,0 +1,76 @@
+.search-results {
+    display: none; /* Inicialmente oculto */
+    position: absolute;
+    top: 110%; /* Ajuste a posição se necessário */
+    left: 35%;
+    width: 100vh; /* Largura do modal */
+    max-height: 10em; /* Limita a altura */
+    overflow-y: auto; /* Rolagem se necessário */
+    z-index: 1000;
+    background-color: #f0f0f0; /* Cor de fundo do modal (pode mudar conforme desejado) */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Flex para garantir que os itens fiquem na mesma linha e alinhados */
+.search-result {
+    display: flex;
+    justify-content: space-between; /* Espaça os itens igualmente */
+    align-items: center; /* Alinha os itens verticalmente */
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #ffffff; /* Cor de fundo para cada linha de produto */
+    border-radius: 4px;
+}
+
+/* Nome do produto */
+.product-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-right: 1em; /* Espaço entre o nome do produto e o username */
+    flex: 1; /* Isso garante que o nome do produto ocupe o espaço disponível */
+}
+
+/* Nome do usuário */
+.product-owner {
+    font-size: 0.9rem;
+    color: #555;
+    margin-right: 1em; /* Espaço entre o nome do usuário e os botões */
+    flex: 1; /* Isso garante que o nome do usuário ocupe o espaço disponível */
+}
+
+/* Estilo do container dos botões (carrinho e ver mais) */
+.action-buttons {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo do botão de adicionar ao carrinho */
+.add-to-cart, .view-more {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: .2em;
+    margin-left: 0.5em; /* Espaço entre os botões */
+}
+
+/* Estilo dos ícones dentro dos botões */
+.add-to-cart i {
+    font-size: 1.5rem; /* Tamanho do ícone */
+    color: rgba(0, 128, 0, 0.692); /* Cor azul para o ícone */
+    transition: color 0.3s;
+}
+.view-more i {
+    font-size: 1.5rem; /* Tamanho do ícone */
+    color: #007bff; /* Cor azul para o ícone */
+    transition: color 0.3s;
+}
+.view-more:hover i {
+    color: #0056b3; /* Muda para uma cor mais escura ao passar o mouse */
+}
+.add-to-cart:hover i {
+    color: rgb(0, 128, 0);
+}

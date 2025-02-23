@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>suporte</title>
+    <link rel="stylesheet" href="../assets/CSS/index.css">
+    <link rel="stylesheet" href="./assets/CSS/suporte.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/JS/loadPages.js"></script>
+    <script src="/assets/JS/localStorage.js"></script>
+    <script src="./assets/JS/loginAuthentication.js"></script>
+    <script src="./assets/JS/suporte.js"></script>
+    <script src="./assets/JS/axiosConfig.js"></script>
+    <link rel="stylesheet" href="/assets/CSS/search.css">
+    <script src="/assets/JS/carrinho.js"></script>
+    <script src="./assets/JS/search.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+
+</head>
+<body>
+    <header id="header" class="header-conteiner">
+        <nav id="navbar" class="navbar">
+            <div id="menu">
+                <ul class="menu">
+                    <li>
+                        <a href="#" class="logo">
+                            <img data-content="index" src="../assets/IMG/pegai-logo.png" alt="logo do Pegaí" width="80" height="70">
+                        </a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="index">Home</a>
+                    </li>
+                    <!-- <li class="hover">
+                        <a href="#" data-content="categorias">Categorias</a>
+                    </li> -->
+                    <li class="hover">
+                        <a href="#" data-content="perto-de-voce">Perto de você</a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="suporte">Suporte</a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="sobrenos">Sobre nós</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="search" class="search">
+                <input type="text" placeholder="Buscar" id="searchInput"> <!-- Área para exibir os resultados -->
+            </div>
+            <div id="searchResults" class="search-results"></div>
+            <div id="login">
+                <button id="loginbtn">Login/Registrar</button>
+                <a data-content="perfil" id="userNameLink" class="display-none"></a>
+                <a href="#" id="logoutLink" class="display-none">Logout</a>
+
+            </div>
+        </nav>
+    </header>
+    <body>
+        <main>
+            <section id="suporte">
+                <div class="container">
+                    <!-- Título e Parágrafo Explicativo -->
+                    <h1>Suporte ao Cliente</h1>
+                    <p>Consulte as respostas para suas dúvidas abaixo ou entre em contato com nossa equipe por meio do nosso formulário ou do <span class="chat">Iziel, nosso assistente virtual.</span></p>
+                    
+                    <!-- Barra de navegação com ícones -->
+                    <div class="tabs">
+                        <button id="faq-btn" class="tab-btn active-tab"><i class="fas fa-question-circle"></i> <span>FAQ</span></button>
+                        <button id="contact-btn" class="tab-btn"><i class="fas fa-envelope"></i> <span>Contato</span></button>
+                        <button id="chat-btn" class="tab-btn"><i class="fas fa-comment-dots"></i> <span>Chat</span></button>
+                    </div>
+            
+                    <!-- Seção FAQ - Será exibida inicialmente -->
+                    <section id="faq-section" class="faq-section active">
+                        <h2><i class="fas fa-question-circle"></i> FAQ - Perguntas Frequentes</h2>
+                        <input type="text" id="faq-search" placeholder="Pesquise por uma pergunta..." class="faq-search-input">
+                        <div id="faq-items" class="faq-items">
+                            <div class="faq-item">
+                                <div class="faq-question">Como posso cancelar meu pedido?</div>
+                                <div class="faq-answer">Você pode cancelar seu pedido dentro de 24 horas após a compra, entrando em contato com nossa central de atendimento.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">Posso alterar o endereço de entrega?</div>
+                                <div class="faq-answer">Sim, é possível alterar o endereço de entrega antes de o pedido ser despachado. Entre em contato com nosso suporte.</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">Qual o prazo de entrega?</div>
+                                <div class="faq-answer">O prazo de entrega depende da sua localização, mas normalmente leva entre 5 a 10 dias úteis.</div>
+                            </div>
+                            <!-- Mais perguntas aqui -->
+                        </div>
+                    </section>
+            
+                    <!-- Seção de Contato -->
+                    <section id="form-contato" class="form-contact">
+                        <h2><i class="fas fa-envelope"></i> Entre em Contato</h2>
+                        <form>
+                            <label for="name">Nome:</label>
+                            <input type="text" id="name" name="name" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                            <label for="message">Mensagem:</label>
+                            <textarea id="message" name="message" required></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+                    </section>
+            
+                    <!-- Seção de Chatbot -->
+                    <section id="chatbot" class="chatbot-section">
+                        <h2><i class="fas fa-comment-dots"></i> Chatbot</h2>
+                        <div class="chat-box">
+                            <div class="chat-message">Olá, sou Iziel seu assistente virtual. Como posso te ajudar hoje?</div>
+                            <!-- A interação real do chatbot seria inserida aqui -->
+                        </div>
+                        <textarea id="chat-input" placeholder="Digite sua mensagem..."></textarea>
+                        <button id="chat-send">Enviar</button>
+                    </section>
+                </div>
+            </section> 
+            <!-- Modal Carrinho -->
+            <div id="carrinho-container" class="carrinho-container" style="display: none;">
+                <div class="carrinho-header">
+                    <h2>Meu Carrinho</h2>
+                </div>
+                <div class="carrinho-items">
+                    <table class="carrinho-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="carrinho-list"></tbody>
+                    </table>
+                </div>
+                <div class="carrinho-footer">
+                    <button id="esvaziar-carrinho" class="esvaziar-carrinho-btn">Esvaziar Carrinho</button>
+                    <button id="solicitar-emprestimo" class="solicitar-emprestimo-btn">Solicitar Empréstimo</button>
+                </div>
+            </div>           
+        </main>
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Desenvolvedor</h3>
+                    <p>José Adrian Moura</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i><a href="mailto:jadriannassilva@alu.ufc.br">jadriannassilva@alu.ufc.br</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <ul>
+                        <li><i class="fab fa-facebook" style="color: #1877F2;"></i><a href="https://www.facebook.com/jadriannassilva?locale=pt_BR">Facebook</a></li>
+                        <li><i class="fab fa-instagram" style="color: #E4405F;"></i><a href="https://www.instagram.com/js_adryan/?next=%2F">Instagram</a></li>
+                        <li><i class="fab fa-github" style="color: #333;"></i><a href="https://github.com/jsadriann">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Tecnologias</h3>
+                    <ul class="tech-list">
+                        <li><i class="fab fa-html5" style="color: #E34F26;"></i> HTML</li>
+                        <li><i class="fab fa-css3-alt" style="color: #1572B6;"></i> CSS</li>
+                        <li><i class="fab fa-js" style="color: #F7DF1E;"></i> JavaScript</li>
+                        <li><i class="fab fa-node" style="color: #8CC84B;"></i> TypeScript</li>
+                        <li><i class="fab fa-bootstrap" style="color: #563D7C;"></i> Bootstrap</li>
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="footer-bottom">
+                <p>&copy; 2025 Todos os direitos reservados</p>
+            </div>
+        </footer>
+    </body>

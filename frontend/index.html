@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" href="../assets/CSS/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/assets/JS/localStorage.js"></script>
+    <script src="./assets/JS/axiosConfig.js"></script>
+    <script src="./assets/JS/loadPages.js"></script>
+    <script src="./assets/JS/loginAuthentication.js"></script>
+    <script src="/assets/JS/carrinho.js"></script>
+    <script src="./assets/JS/loadProduct.js"></script>
+    <script src="./assets/JS/search.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/assets/CSS/search.css">
+
+
+</head>
+<body>
+    <header id="header" class="header-conteiner">
+        <nav id="navbar" class="navbar">
+            <div id="menu">
+                <ul class="menu">
+                    <li>
+                        <a href="#" class="logo">
+                            <img data-content="index" src="../assets/IMG/pegai-logo.png" alt="logo do Pegaí" width="80" height="70">
+                        </a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="index">Home</a>
+                    </li>
+                    <!-- <li class="hover">
+                        <a href="#" data-content="categorias">Categorias</a>
+                    </li> -->
+                    <li class="hover">
+                        <a href="#" data-content="perto-de-voce">Perto de você</a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="suporte">Suporte</a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="sobrenos">Sobre nós</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="search" class="search">
+                <input type="text" placeholder="Buscar" id="searchInput"> <!-- Área para exibir os resultados -->
+            </div>
+            <div id="searchResults" class="search-results"></div>
+            <div id="login">
+
+                <button id="loginbtn">Login/Registrar</button>
+                <a data-content="perfil" id="userNameLink" class="display-none"></a>
+                <a href="#" id="logoutLink" class="display-none">Logout</a>
+
+            </div>
+        </nav>
+    </header>
+
+    <main id="main" class="product-list">
+        <!-- Modal Carrinho -->
+        <div id="carrinho-container" class="carrinho-container" style="display: none;">
+            <div class="carrinho-header">
+                <h2>Meu Carrinho</h2>
+            </div>
+            <div class="carrinho-items">
+                <table class="carrinho-table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="carrinho-list"></tbody>
+                </table>
+            </div>
+            <div class="carrinho-footer">
+                <button id="esvaziar-carrinho" class="esvaziar-carrinho-btn">Esvaziar Carrinho</button>
+                <button id="solicitar-emprestimo" class="solicitar-emprestimo-btn">Solicitar Empréstimo</button>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Desenvolvedor</h3>
+                <p>José Adrian Moura</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:jadriannassilva@alu.ufc.br">jadriannassilva@alu.ufc.br</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <ul>
+                    <li><i class="fab fa-facebook" style="color: #1877F2;"></i><a href="https://www.facebook.com/jadriannassilva?locale=pt_BR">Facebook</a></li>
+                    <li><i class="fab fa-instagram" style="color: #E4405F;"></i><a href="https://www.instagram.com/js_adryan/?next=%2F">Instagram</a></li>
+                    <li><i class="fab fa-github" style="color: #333;"></i><a href="https://github.com/jsadriann">GitHub</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Tecnologias</h3>
+                <ul class="tech-list">
+                    <li><i class="fab fa-html5" style="color: #E34F26;"></i> HTML</li>
+                    <li><i class="fab fa-css3-alt" style="color: #1572B6;"></i> CSS</li>
+                    <li><i class="fab fa-js" style="color: #F7DF1E;"></i> JavaScript</li>
+                    <li><i class="fab fa-node" style="color: #8CC84B;"></i> TypeScript</li>
+                    <li><i class="fab fa-bootstrap" style="color: #563D7C;"></i> Bootstrap</li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>&copy; 2025 Todos os direitos reservados</p>
+        </div>
+    </footer>
+</body>
+</html>

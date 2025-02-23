@@ -1,0 +1,139 @@
+/* Sobre nós */
+.sobre {
+    background-color: var(--secundary-color);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 80vw;
+    margin: auto;
+    padding-bottom: 3rem;
+}
+
+main {
+    display: block;
+    opacity: 1;
+    animation: slideIn 1s ease-out;
+}
+
+.sobre-texto {
+    text-align: justify;
+    padding: 0 5%;
+}
+
+.sobre-texto h1 {
+    font-size: 2.5em;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    text-align: center;
+    font-weight: bold;
+}
+
+.sobre-texto p {
+    font-size: 1.2em;
+    line-height: 1.8em;
+    margin-bottom: 1.5rem;
+    color: var(--button-registrar);
+}
+
+.sobre-texto strong {
+    color: var(--primary-color);
+}
+
+/* Estilo do Carrossel */
+.carousel {
+    position: relative;
+    width: 80vw;
+    max-width: 900px;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Itens do Carrossel */
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Imagem Responsiva */
+.carousel-item img {
+    width: 100%; /* Se ajusta automaticamente */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Texto Overlay */
+.text-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Título */
+.text-overlay h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+/* Descrição */
+.text-overlay p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+    font-style: italic;
+}
+
+/* Botões de Navegação */
+button.carouse {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+button.carouse:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+

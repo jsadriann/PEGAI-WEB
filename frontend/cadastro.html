@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./assets/CSS/cadastro.css">
+    <script src="./assets/JS/cadastroStyle.js" defer></script>
+    <script src="./assets/JS/cadastroControl.js" defer></script>
+    <script src="./assets/JS/axiosConfig.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <main>
+        <div id="teste" class="login-registrar-conteiner">
+        <section id="form-color" class="login-color login-info section-conteiner">
+            <h2>Bem-vindo ao</h2>
+            <img src="./assets/IMG/pegai-logo.png" width="200" height="200">
+            <p>Este é um sistema desenvolvido para facilitar o empréstimo de equipamentos, promovendo o compartilhamento e o acesso responsável aos recursos que você precisa.</p>
+            <div class="button">
+                <button id="reg" class="registrar">Registrar</button>
+                <button id="ent" class="-entrar">Entrar</button>
+            </div>
+            </section>
+            <div class="form-conteiner">
+                <form id="form-entrar" class="form-login" novalidate>
+                    <h2>Login</h2>
+                    
+                    <div class="input-group">
+                        <label for="user">Usuário</label>
+                        <input type="text" name="user" id="user" placeholder="Digite seu usuário">
+                    </div>
+            
+                    <div class="input-group">
+                        <label for="password-login">Senha</label>
+                        <input type="password" name="password-login" id="password-login" placeholder="Digite sua senha">
+                    </div>
+            
+                    <div class="options">
+                        <div class="remember">
+                            <input type="checkbox" name="remember" id="remember">
+                            <label for="remember">Lembre-me</label>
+                        </div>
+                        <a href="#">Esqueci minha senha</a>
+                    </div>
+            
+                    <button id="entrar-button" type="submit">Entrar</button>
+                </form>
+                <form id="form-registrar" class="display-none" novalidate>
+                    <div>
+                        <h2>Cadastro</h2>
+                        <div class="input-group">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username">
+                        </div>
+                        <div class="input-group">
+                            <label for="firsh-name">Nome</label>
+                            <input type="text" name="first-name" id="first-name">
+                        </div>
+                        <div class="input-group">
+                            <label for="last-name">Sobrenome</label>
+                            <input type="text" name="last-name" id="last-name">
+                        </div>
+                        <div class="input-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" name="email" id="email">
+                        </div>
+                        <div class="input-group">
+                            <label for="data-nascimento">Data de nascimento</label>
+                            <input type="date" name="data-nascimento" id="data-nascimento">
+                        </div>
+                        <div class="input-group">
+                            <label for="password-registrar">Senha</label>
+                            <input type="password" name="password-registrar" id="password-registrar">
+                        </div>
+                        <div class="input-group">
+                            <label for="password-registrar-verificar">Confirmar senha</label>
+                            <input type="password" name="password-registrar" id="password-registrar-verificar">
+                        </div>
+                        <div class="options">
+                            <div class="remember">
+                                <input type="checkbox" name="aceitar-termos" id="aceitar-termos">
+                                <label for="aceitar-termos">Eu li e aceito os termos de uso</label>
+                            </div>
+                            <a href="">Termos de uso</a>
+                        </div>
+                        <button id="registrar-button" class="submit" type="submit">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+
+
+      

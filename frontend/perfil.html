@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" href="../assets/CSS/index.css">
+    <link rel="stylesheet" href="./assets/CSS/perfil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/CSS/search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/assets/JS/localStorage.js"></script>
+    <script src="./assets/JS/axiosConfig.js"></script>
+    <script src="./assets/JS/loadPages.js"></script>
+    <script src="./assets/JS/loginAuthentication.js"></script>
+    <script src="./assets/JS/perfil.js"></script>
+    <script src="/assets/JS/carrinho.js"></script>
+    <script src="./assets/JS/search.js"></script>
+
+</head>
+<body>
+    <header id="header" class="header-conteiner">
+        <nav id="navbar" class="navbar">
+            <div id="menu">
+                <ul class="menu">
+                    <li>
+                        <a href="#" class="logo">
+                            <img data-content="index" src="../assets/IMG/pegai-logo.png" alt="logo do Pegaí" width="80" height="70">
+                        </a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="index">Home</a>
+                    </li>
+                    <!-- <li class="hover">
+                        <a href="#" data-content="categorias">Categorias</a>
+                    </li> -->
+                    <li class="hover">
+                        <a href="#" data-content="perto-de-voce">Perto de você</a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="suporte">Suporte</a>
+                    </li>
+                    <li class="hover">
+                        <a href="#" data-content="sobrenos">Sobre nós</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="search" class="search">
+                <input type="text" placeholder="Buscar" id="searchInput"> <!-- Área para exibir os resultados -->
+            </div>
+            <div id="searchResults" class="search-results"></div>
+            <div id="login">
+                <button id="loginbtn">Login/Registrar</button>
+                <a data-content="perfil" id="userNameLink" class="display-none"></a>
+                <a href="#" id="logoutLink" class="display-none">Logout</a>
+            </div>
+        </nav>
+    </header>
+
+    <div id="main-container">
+        <!-- Menu Lateral -->
+        <aside id="sidebar" class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#" class="menu-item" id="update-data-btn">Atualizar Dados</a></li>
+                <li><a href="#" class="menu-item" id="remove-users-btn">Remover Usuários</a></li>
+                <li><a href="#" class="menu-item" id="add-admin-btn">Adicionar Admin</a></li>
+                <li><a href="#" class="menu-item" id="excluir-conta">Excluir Conta</a></li>
+                <li><a href="#" class="menu-item" id="meusprodutos">Produtos</a></li>
+                <li><a href="#" class="menu-item" id="carrinho">Carrinho</a></li>
+            </ul>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main id="main" class="product-list">
+            <!-- Formulário de Atualização -->
+            <div id="update-form-container" class="form-container" style="display: none;">
+                <h2>Atualizar Dados</h2>
+                <form id="update-form">
+                    <!-- <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input class="isNormal" type="text" id="username" name="username">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input class="isNormal" type="text" id="nome" name="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="sobrenome">Sobrenome:</label>
+                        <input class="isNormal" type="text" id="sobrenome" name="sobrenome">
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha:</label>
+                        <input class="isNormal" type="password" id="senha" name="senha">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-senha">Confirmar Senha:</label>
+                        <input class="isNormal" type="password" id="confirm-senha" name="confirm-senha">
+                    </div>
+                    <button type="submit" id="update-btn">Atualizar</button>
+                </form>
+            </div>
+            <div id="meus-produtos-container" class="meus-produtos-container" style="display: none;">
+                <div class="div-adicionarProdutoBtn">
+                    <button id="adicionarProdutoBtn" class="add-product-btn">
+                        Adicionar um novo produto
+                    </button>
+                </div>
+                <div class="div-product-table">
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productList"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Modal Carrinho -->
+            <div id="carrinho-container" class="carrinho-container" style="display: none;">
+                <div class="carrinho-header">
+                    <h2>Meu Carrinho</h2>
+                </div>
+                <div class="carrinho-items">
+                    <table class="carrinho-table">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="carrinho-list"></tbody>
+                    </table>
+                </div>
+                <div class="carrinho-footer">
+                    <button id="esvaziar-carrinho" class="esvaziar-carrinho-btn">Esvaziar Carrinho</button>
+                    <button id="solicitar-emprestimo" class="solicitar-emprestimo-btn">Solicitar Empréstimo</button>
+                </div>
+            </div>
+
+
+
+            
+
+                <!-- Modal de Adicionar Produto -->
+            <div id="modal-adicionar-produto" class="modal">
+                <div class="modal-content">
+                    <h2>Adicionar Produto</h2>
+                    <form id="form-adicionar-produto">
+                        <div class="form-gr">
+                            <div>
+                                <label for="nome-produto">Nome:</label>
+                                <input type="text" id="nome-produto" name="nome" >
+                            </div>
+                            <div>
+                                <label for="descricao-produto">Descrição:</label>
+                                <textarea id="descricao-produto" name="descricao" ></textarea>
+                            </div>
+                        </div>
+            
+                        <div class="form-gr">
+                            <div>
+                                <label for="quantidade-produto">Quantidade:</label>
+                                <input type="number" id="quantidade-produto" name="quantidade" >
+                            </div>
+                            <div>
+                                <label for="foto-produto">Foto:</label>
+                                <input type="file" id="foto-produto" name="foto" >
+                            </div>
+                        </div>
+            
+                        <div class="form-buttons">
+                            <button type="submit">Cadastrar</button>
+                            <button type="button" id="fechar-modal">Fechar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="modal-atualizar-produto" class="modal">
+                <div class="modal-content">
+                    <h2>Atualizar Produto</h2>
+                    <form id="form-atualizar-produto">
+                        <input type="hidden" id="produto-id" name="produto-id" /> <!-- ID do produto -->
+                        
+                        <div class="form-gr">
+                            <div>
+                                <label for="nome-produto-atualizar">Nome:</label>
+                                <input type="text" id="nome-produto-atualizar" name="nome" />
+                            </div>
+                            <div>
+                                <label for="descricao-produto-atualizar">Descrição:</label>
+                                <textarea id="descricao-produto-atualizar" name="descricao"></textarea>
+                            </div>
+                        </div>
+            
+                        <div class="form-gr">
+                            <div>
+                                <label for="quantidade-produto-atualizar">Quantidade:</label>
+                                <input type="number" id="quantidade-produto-atualizar" name="quantidade" />
+                            </div>
+                        </div>
+            
+                        <div class="form-buttons">
+                            <button type="submit">Atualizar</button>
+                            <button type="button" id="fechar-modal-atualizar">Fechar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+                        
+        </main>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Desenvolvedor</h3>
+                <p>José Adrian Moura</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i><a href="mailto:jadriannassilva@alu.ufc.br">jadriannassilva@alu.ufc.br</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <ul>
+                    <li><i class="fab fa-facebook" style="color: #1877F2;"></i><a href="https://www.facebook.com/jadriannassilva?locale=pt_BR">Facebook</a></li>
+                    <li><i class="fab fa-instagram" style="color: #E4405F;"></i><a href="https://www.instagram.com/js_adryan/?next=%2F">Instagram</a></li>
+                    <li><i class="fab fa-github" style="color: #333;"></i><a href="https://github.com/jsadriann">GitHub</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Tecnologias</h3>
+                <ul class="tech-list">
+                    <li><i class="fab fa-html5" style="color: #E34F26;"></i> HTML</li>
+                    <li><i class="fab fa-css3-alt" style="color: #1572B6;"></i> CSS</li>
+                    <li><i class="fab fa-js" style="color: #F7DF1E;"></i> JavaScript</li>
+                    <li><i class="fab fa-node" style="color: #8CC84B;"></i> TypeScript</li>
+                    <li><i class="fab fa-bootstrap" style="color: #563D7C;"></i> Bootstrap</li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="footer-bottom">
+            <p>&copy; 2025 Todos os direitos reservados</p>
+        </div>
+    </footer>
+</body>
+</html>
