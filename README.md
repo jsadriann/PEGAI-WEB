@@ -149,11 +149,15 @@ O sistema contará com três tipos de usuário: Estudante, Administrador e Usuá
 
 **Frontend:**
 
-Lista as tecnologias, frameworks e bibliotecas utilizados.
+HTML
+CSS
+Typescript
+JavaScript
+Canva
 
 **Backend:**
 
-Lista as tecnologias, frameworks e bibliotecas utilizados.
+Strapi
 
 
 ## :shipit: Operações implementadas para cada entidade da aplicação
@@ -161,9 +165,9 @@ Lista as tecnologias, frameworks e bibliotecas utilizados.
 
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
-| Entidade 1 | X |  X  |  | X |
-| Entidade 2 | X |    |  X | X |
-| Entidade 3 | X |    |  |  |
+| Estudante | X |  X  | X | X |
+| Produto | X | X | X | X |
+| Admin | X | X | X | X |
 
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
@@ -171,8 +175,22 @@ Lista as tecnologias, frameworks e bibliotecas utilizados.
 
 | Método HTTP | URL |
 | --- | --- |
-| GET | api/entidade1/|
+| POST | api/auth/local/register |
+| POST | api/auth/local |
+| POST | api/upload |
+| POST | api/produtos |
 | POST | api/entidade2 |
+| GET | api/users/me |
+| GET | api/users/:id |
+| GET | api/produtos |
+| GET | api/produtos/:id |
+| GET | api/produtos?filters[nome][$contains]=${query}&populate=user |
+| GET | api/produtos?filters[user][id][$eq]=id |
+| PUT | api/users/:id |
+| PUT | api/produtos/:id |
+| DELETE | api/users/:id |
+| DELETE | api/produtos/:id |
+
 
 
 ## header
