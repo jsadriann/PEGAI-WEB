@@ -18,7 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const page = target.getAttribute('data-content');
         loadPageContent(page);
     });
+    loginBtn.addEventListener('click', function (e) {
+        const target = e.target;
+        const page = target.getAttribute('data-content');
+        loadPageContent(page);
+    });
     function loadPageContent(page) {
-        location.assign(`${page}.html`);
+        location.assign(`/frontend/${page}.html`);
     }
 });

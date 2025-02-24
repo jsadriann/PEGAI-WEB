@@ -22,7 +22,13 @@ document.addEventListener('DOMContentLoaded', function () {
         loadPageContent(page);
     });
 
+    loginBtn.addEventListener('click', function(e:Event) {
+        const target = e.target as HTMLElement;
+        const page = target.getAttribute('data-content')!;
+        loadPageContent(page);
+    });
+
     function loadPageContent(page: string): void {
-        location.assign(`${page}.html`)
+        location.assign(`/frontend/${page}.html`)
     }
 });

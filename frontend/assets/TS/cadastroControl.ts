@@ -41,7 +41,7 @@ formCadastro.addEventListener("submit",async (event) => {
             Authorization: `Bearer ${response.data.jwt}`, // Incluindo o JWT no cabeçalho
         }});
         //redirecionando pra login
-        location.assign('../../cadastro.html')
+        location.assign('/frontend/cadastro.html')
 
         console.log('Campos adicionais atualizados com sucesso!'); 
     }catch (error: any) {
@@ -84,5 +84,5 @@ async function login(identificador: string, senha: string) {
     localStorage.setItem('role', res.data.role.name)
     localStorage.setItem('token', jwt);
     //redirecionando para home
-    location.assign('/index.html')
+    location.assign('/frontend/index.html')
   }

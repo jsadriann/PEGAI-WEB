@@ -67,7 +67,7 @@ async function loadProducts(): Promise<void> {
             addToCartBtn.addEventListener('click', () => {
                 if(localStorage.getItem('token') == null){
                     alert('Você será redirecionado para a pagina de login');
-                    location.assign('/cadastro.html');
+                    location.assign('/frontend/cadastro.html');
                 }else{
                     salvarProdutoNoLocalStorage({ id: product.documentId, nome: nome });
                     console.log(`Produto ${nome} adicionado ao carrinho!`);

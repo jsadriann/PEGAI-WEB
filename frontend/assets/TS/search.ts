@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (!isUserLoggedIn()) {
                         resetAll();
-                        location.assign('/cadastro.html');
+                        location.assign('/frontend/cadastro.html');
                     } else {
                         console.log(`Produto ${produtoId} (${produtoNome}) adicionado ao carrinho!`);
                         salvarProdutoNoLocalStorage({ id: produtoId, nome: produtoNome });

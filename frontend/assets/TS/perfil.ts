@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('✅ Conta excluída com sucesso!');
                 alert("Conta excluída com sucesso!");
                 resetAll(); // Limpa os dados do usuário
-                location.assign('/index.html'); // Redireciona o usuário para a página inicial após a exclusão
+                location.assign('/frontend/index.html'); // Redireciona o usuário para a página inicial após a exclusão
             } else {
                 console.error('⚠️ Resposta inesperada ao excluir:', deleteResponse);
                 throw new Error('Falha ao excluir a conta');
@@ -530,13 +530,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
             });
     
-            if (produtoResponse.status === 201) {
+           // if (produtoResponse.status === 201) {
                 console.log('✅ Produto adicionado com sucesso!', produtoResponse.data);
                 alert('Produto cadastrado com sucesso!');
                 elements.formAdicionarProduto.reset();
                 elements.modal.style.display = 'none';
                 await carregarProdutosUsuario();
-            }
+            //}
         } catch (error) {
             console.error('❌ Erro ao adicionar produto:', error);
             alert('Erro ao cadastrar o produto. Verifique o console para mais detalhes.');

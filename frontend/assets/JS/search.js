@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const produtoNome = this.getAttribute('data-nome');
                     if (!isUserLoggedIn()) {
                         resetAll();
-                        location.assign('/cadastro.html');
+                        location.assign('/frontend/cadastro.html');
                     }
                     else {
                         console.log(`Produto ${produtoId} (${produtoNome}) adicionado ao carrinho!`);

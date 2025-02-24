@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function () {
         userNameLink.style.display = 'none';
         logoutLink.style.display = 'none';
         loginBtn.style.display = 'inline';
-        location.assign('/index.html');
+        location.assign('/frontend/index.html');
     });
     loginBtn.addEventListener('click', function () {
         resetAll();
-        location.assign('/cadastro.html');
+        location.assign('/frontend/cadastro.html');
     });
 });
 function afterLoginSuccess(userName, token) {
