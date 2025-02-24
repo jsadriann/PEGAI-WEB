@@ -5,11 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function isUserLoggedIn() {
         return localStorage.getItem('token');
     }
-    // function salvarProdutoNoLocalStorage(produto) {
-    //     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    //     carrinho.push(produto);
-    //     localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    // }
     searchInput.addEventListener('input', async function () {
         const query = searchInput.value.trim();
         if (!query) {

@@ -1,29 +1,26 @@
 "use strict";
 async function loadProducts() {
     const main = document.getElementById('main');
-    main.innerHTML = ''; // Limpar produtos antigos, se houver
+    main.innerHTML = '';
     try {
-        // Chamada para a API usando axios
         const response = await api.get('/produtos', {
             params: {
                 populate: ['user', 'foto'], // Povoar fotos
             },
         });
-        console.log('📦 Produtos recebidos:', response.data);
-        const products = response.data.data; // Ajuste: data contém os produtos
+        console.log('Produtos recebidos:', response.data);
+        const products = response.data.data;
         if (!products || !Array.isArray(products)) {
             throw new Error('Estrutura inesperada da resposta da API');
         }
-        // Adicionar os produtos dentro de um container de lista
         const productList = document.createElement('div');
         productList.classList.add('product-list');
-        main.appendChild(productList); // Adiciona a lista ao main
-        // Para cada produto, criar um card e adicionar na lista
+        main.appendChild(productList);
         products.forEach((product) => {
-            console.log('🔍 Produto:', product);
+            console.log('Produto:', product);
             const { id, nome = 'Nome indisponível', descricao = 'Sem descrição', quantidade = 0, user, foto } = product;
             const userName = user?.username;
-            const fotoUrl = foto?.[0]?.url || 'placeholder.jpg'; // Foto ou imagem padrão
+            const fotoUrl = foto?.[0]?.url || 'placeholder.jpg';
             // Criação do card do produto
             const productCard = document.createElement('div');
             productCard.classList.add('product-item');
@@ -45,7 +42,7 @@ async function loadProducts() {
             productOwner.textContent = `Proprietário: ${userName}`;
             // Criação do botão "Adicionar ao Carrinho"
             const addToCartBtn = document.createElement('button');
-            addToCartBtn.classList.add('add-to-cart-btn'); // Classe personalizada
+            addToCartBtn.classList.add('add-to-cart-btn');
             addToCartBtn.dataset.id = id.toString();
             addToCartBtn.textContent = 'Adicionar ao Carrinho';
             // Função para o botão "Adicionar ao Carrinho"
@@ -65,15 +62,14 @@ async function loadProducts() {
             productDetails.appendChild(productDescription);
             productDetails.appendChild(productQuantity);
             productDetails.appendChild(productOwner);
-            productDetails.appendChild(addToCartBtn); // Adiciona o botão ao card
+            productDetails.appendChild(addToCartBtn);
             productCard.appendChild(productImage);
             productCard.appendChild(productDetails);
-            // Adiciona o card na lista de produtos
             productList.appendChild(productCard);
         });
     }
     catch (error) {
-        console.error('❌ Erro ao carregar produtos:', error.response?.data || error);
+        console.error('Erro ao carregar produtos:', error.response?.data || error);
         main.innerHTML = '<p>Erro ao carregar produtos.</p>';
     }
 }

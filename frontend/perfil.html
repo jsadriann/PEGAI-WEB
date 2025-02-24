@@ -15,7 +15,7 @@
     <script src="/frontend/assets/JS/axiosConfig.js"></script>
     <script src="/frontend/assets/JS/loadPages.js"></script>
     <script src="/frontend/assets/JS/loginAuthentication.js"></script>
-    <script src="/frontend/assets/JS/perfil.js"></script>
+    <script src="/frontend/assets/JS/perfil.js" defer></script>
     <script src="/frontend/assets/JS/carrinho.js"></script>
     <script src="/frontend/assets/JS/search.js"></script>
 
@@ -65,7 +65,7 @@
             <ul class="sidebar-menu">
                 <li><a href="#" class="menu-item" id="update-data-btn">Atualizar Dados</a></li>
                 <li><a href="#" class="menu-item" id="remove-users-btn">Remover Usuários</a></li>
-                <li><a href="#" class="menu-item" id="add-admin-btn">Adicionar Admin</a></li>
+                <li><a href="#" class="menu-item" id="add">Administrador</a></li>
                 <li><a href="#" class="menu-item" id="excluir-conta">Excluir Conta</a></li>
                 <li><a href="#" class="menu-item" id="meusprodutos">Produtos</a></li>
                 <li><a href="#" class="menu-item" id="carrinho">Carrinho</a></li>
@@ -120,6 +120,31 @@
                     </table>
                 </div>
             </div>
+
+            <div id="painel-admin-container" class="painel-admin-container" style="display: none;">
+                <div class="div-adicionarAtualizarBtns">
+                    <!-- Botões de cadastrar e atualizar -->
+                    <button id="cadastrarBtnAdmin" class="admin-btn">Cadastrar</button>
+                    <button id="atualizarBtn" class="admin-btn">Atualizar</button>
+                </div>
+            
+                <div class="div-admin-table">
+                    <!-- Tabela de usuários -->
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userList">
+                            <!-- Conteúdo da tabela será preenchido aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
 
             <!-- Modal Carrinho -->
             <div id="carrinho-container" class="carrinho-container" style="display: none;">
@@ -181,6 +206,36 @@
                     </form>
                 </div>
             </div>
+            <div id="modal-cadastrar-admin" class="modal">
+                <div class="modal-content">
+                    <h2>Cadastrar Administrador</h2>
+                    <form id="form-cadastrar-admin">
+                        <div class="form-gr">
+                            <div>
+                                <label for="username-admin">Username:</label>
+                                <input type="text" id="username-admin" name="username" required>
+                            </div>
+                            <div>
+                                <label for="email-admin">Email:</label>
+                                <input type="email" id="email-admin" name="email" required>
+                            </div>
+                        </div>
+            
+                        <div class="form-gr">
+                            <div>
+                                <label for="password-admin">Senha:</label>
+                                <input type="password" id="password-admin" name="password" required>
+                            </div>
+                        </div>
+            
+                        <div class="form-buttons">
+                            <button type="submit">Cadastrar</button>
+                            <button type="button" id="fechar-modal-admin">Fechar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
             <div id="modal-atualizar-produto" class="modal">
                 <div class="modal-content">
                     <h2>Atualizar Produto</h2>

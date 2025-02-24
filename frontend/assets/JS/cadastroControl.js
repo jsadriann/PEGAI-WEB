@@ -24,17 +24,17 @@ formCadastro.addEventListener("submit", async (event) => {
         password: inputPasswordReg.value,
     };
     try {
-        // 🔐 Registro inicial
+        //Registro inicial
         const response = await api.post('/auth/local/register', user);
         console.log('Usuário cadastrado com sucesso:', response.data);
         //Atualizar campos extras após o registro
         const userId = response?.data.user.id;
         const res = await api.put(`/users/${userId}`, {
             sobrenome: inputSobrenome.value,
-            nascimento: new Date(inputDataNascimento.value), // Certifique-se que está em YYYY-MM-DD
+            nascimento: new Date(inputDataNascimento.value),
             nome: inputNome.value
         }, { headers: {
-                Authorization: `Bearer ${response.data.jwt}`, // Incluindo o JWT no cabeçalho
+                Authorization: `Bearer ${response.data.jwt}`,
             } });
         //redirecionando pra login
         location.assign('/frontend/cadastro.html');
@@ -52,26 +52,36 @@ formLogin?.addEventListener('submit', async (e) => {
     await login(identificador, senha);
 });
 async function login(identificador, senha) {
-    let res = await api.post('/auth/local', {
-        identifier: identificador,
-        password: senha
-    });
-    console.log(res.data);
-    const { jwt } = res.data;
-    res = await api.get('/users/me', {
-        headers: {
-            Authorization: `Bearer ${jwt}`
-        },
-        params: {
-            populate: ['role']
-        }
-    });
-    console.log(res.data);
-    localStorage.setItem('username', res.data.username);
-    localStorage.setItem('id', res.data.id);
-    localStorage.setItem('documentId', res.data.documentId);
-    localStorage.setItem('role', res.data.role.name);
-    localStorage.setItem('token', jwt);
-    //redirecionando para home
-    location.assign('/frontend/index.html');
+    try {
+        // Fazendo a requisição de login
+        let res = await api.post('/auth/local', {
+            identifier: identificador,
+            password: senha
+        });
+        console.log(res.data);
+        const { jwt } = res.data;
+        // Buscando informações do usuário autenticado
+        res = await api.get('/users/me', {
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            },
+            params: {
+                populate: ['role']
+            }
+        });
+        console.log(res.data);
+        //Armazenando dados no localStorage
+        localStorage.setItem('username', res.data.username);
+        localStorage.setItem('id', res.data.id);
+        localStorage.setItem('documentId', res.data.documentId);
+        localStorage.setItem('role', res.data.role.name);
+        localStorage.setItem('roleId', res.data.role.id);
+        localStorage.setItem('token', jwt);
+        //Redirecionando para a página inicial
+        location.assign('/frontend/index.html');
+    }
+    catch (error) {
+        console.error('Erro durante o login:', error);
+        alert('Falha na autenticação. Verifique suas credenciais e tente novamente.');
+    }
 }
