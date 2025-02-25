@@ -167,7 +167,7 @@ Strapi
 | --- | --- | --- | --- | --- |
 | Estudante | X |  X  | X | X |
 | Produto | X | X | X | X |
-| Admin | X | X | X | X |
+| Emprestimo  | X | X |  |  |
 
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
@@ -179,11 +179,12 @@ Strapi
 | POST | api/auth/local |
 | POST | api/upload |
 | POST | api/produtos |
-| POST | api/entidade2 |
+| POST | api/emprestimos |
 | GET | api/users/me |
 | GET | api/users/:id |
 | GET | api/produtos |
 | GET | api/produtos/:id |
+| GET | api/emprestimos?filters[user][id][$eq]=id
 | GET | api/produtos?filters[nome][$contains]=${query}&populate=user |
 | GET | api/produtos?filters[user][id][$eq]=id |
 | PUT | api/users/:id |
