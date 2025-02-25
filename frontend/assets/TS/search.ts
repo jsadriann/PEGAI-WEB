@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const produtos = response.data.data;
 
             if (produtos.length > 0) {
+                console.log(produtos)
                 searchResults.innerHTML = produtos.map(produto => {
                     const nomeUsuario = produto.user ? produto.user.username : 'Usuário desconhecido';
 
@@ -27,8 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="search-result">
                             <span class="product-name">${produto.nome}</span>
                             <span class="product-owner">${nomeUsuario}</span>
+                            
                             <div class="action-buttons">
-                                <button class="add-to-cart" data-id="${produto.id}" data-nome="${produto.nome}">
+                                <button class="add-to-cart" documentId="${produto.documentId}" data-id="${produto.id}" data-nome="${produto.nome}">
                                     <i class="fas fa-shopping-cart"></i>
                                 </button>
                                 <button class="view-more" data-id="${produto.id}">
@@ -49,13 +51,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 button.addEventListener('click', async function () {
                     const produtoId = this.getAttribute('data-id');
                     const produtoNome = this.getAttribute('data-nome');
+                    const documentId = this.getAttribute('documentId');
 
                     if (!isUserLoggedIn()) {
                         resetAll();
                         location.assign('/frontend/cadastro.html');
                     } else {
                         console.log(`Produto ${produtoId} (${produtoNome}) adicionado ao carrinho!`);
-                        salvarProdutoNoLocalStorage({ id: produtoId, nome: produtoNome });
+                        salvarProdutoNoLocalStorage({ documentId: documentId,id: produtoId, nome: produtoNome });
                     }
                 });
             });

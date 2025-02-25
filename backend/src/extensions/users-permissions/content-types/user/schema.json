@@ -82,6 +82,12 @@
       "relation": "oneToMany",
       "target": "api::produto.produto",
       "mappedBy": "user"
+    },
+    "emprestimos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::emprestimo.emprestimo",
+      "mappedBy": "user"
     }
   }
 }

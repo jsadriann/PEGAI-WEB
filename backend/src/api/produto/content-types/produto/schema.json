@@ -41,6 +41,12 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "produtos"
+    },
+    "emprestimos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::emprestimo.emprestimo",
+      "mappedBy": "produtos"
     }
   }
 }

@@ -369,6 +369,39 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiEmprestimoEmprestimo extends Struct.CollectionTypeSchema {
+  collectionName: 'emprestimos';
+  info: {
+    displayName: 'Emprestimo';
+    pluralName: 'emprestimos';
+    singularName: 'emprestimo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    emprestado: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::emprestimo.emprestimo'
+    > &
+      Schema.Attribute.Private;
+    produtos: Schema.Attribute.Relation<'manyToMany', 'api::produto.produto'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiProdutoProduto extends Struct.CollectionTypeSchema {
   collectionName: 'produtos';
   info: {
@@ -386,6 +419,10 @@ export interface ApiProdutoProduto extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     descricao: Schema.Attribute.Text & Schema.Attribute.Required;
     disponivel: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    emprestimos: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::emprestimo.emprestimo'
+    >;
     foto: Schema.Attribute.Media<'images' | 'files', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -874,6 +911,10 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    emprestimos: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::emprestimo.emprestimo'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -918,6 +959,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::emprestimo.emprestimo': ApiEmprestimoEmprestimo;
       'api::produto.produto': ApiProdutoProduto;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

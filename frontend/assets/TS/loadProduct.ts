@@ -68,8 +68,8 @@ async function loadProducts(): Promise<void> {
                     alert('Você será redirecionado para a pagina de login');
                     location.assign('/frontend/cadastro.html');
                 }else{
-                    salvarProdutoNoLocalStorage({ id: product.documentId, nome: nome });
-                    console.log(`Produto ${nome} adicionado ao carrinho!`);
+                    salvarProdutoNoLocalStorage({documentId:product.documentId, id: product.documentId, nome: nome });
+                    console.log(`Produto ${product.documentId} adicionado ao carrinho!`);
                     alert(`Produto ${nome} adicionado ao carrinho!`);
                 }
             });

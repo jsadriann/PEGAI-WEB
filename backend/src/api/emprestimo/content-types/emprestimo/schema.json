@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "emprestimos",
+  "info": {
+    "singularName": "emprestimo",
+    "pluralName": "emprestimos",
+    "displayName": "Emprestimo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "emprestado": {
+      "type": "boolean",
+      "default": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "emprestimos"
+    },
+    "produtos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::produto.produto",
+      "inversedBy": "emprestimos"
+    }
+  }
+}

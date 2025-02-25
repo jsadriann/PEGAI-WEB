@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     elements.updateDataBtn.addEventListener('click', showUpdateForm);
     elements.updateForm.addEventListener('submit', handleUpdateFormSubmit);
     elements.addAdminBtn.addEventListener('click', mostrarPainelAdmin);
+    elements.emprestimo.addEventListener('click',carregarEmprestimos);
 
 
     elements.excluirConta.addEventListener('click', async function() {
@@ -376,16 +377,33 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     // Função para solicitar empréstimo
-    elements.solicitarEmprestimoBtn.addEventListener('click', () => {
-        const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-        if (carrinho.length === 0) {
-            alert('Carrinho vazio. Adicione produtos antes de solicitar o empréstimo.');
-            return;
+    elements.solicitarEmprestimoBtn.addEventListener('click',criarEmprestimo);
+
+    async function criarEmprestimo() {
+        try {
+          const carrinho = JSON.parse(localStorage.getItem('carrinho') as string) || [];
+          const produtosIds = carrinho.map((produto: any) => produto.documentId);
+      
+          const novoEmprestimo = {
+            data: {
+              emprestado: true,
+              user: localStorage.getItem('documentId'),
+              produtos: produtosIds,
+            },
+          };
+      
+          const response = await api.post('/emprestimos', novoEmprestimo,{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          });
+          console.log('Empréstimo criado:', response.data);
+          localStorage.removeItem('carrinho');
+          updateCarrinhoList();
+        } catch (error) {
+          console.error('Erro ao criar empréstimo:', error);
         }
-        alert('Empréstimo solicitado com sucesso!');
-        localStorage.removeItem('carrinho');
-        updateCarrinhoList();
-    });
+      }
 
 
 
@@ -443,6 +461,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
     }
+    function showEmprestimos(){
+        elements.updateFormContainer.style.display = 'none';
+        elements.meusProdutosContainer.style.display = 'none';
+        elements.modal.style.display = 'none';
+        elements.carrinhoContainer.style.display ='none'
+        elements.painelAdmin.style.display = 'none';
+        elements.meusEmprestimos.style.display = 'block';
+    }
 
     function confirmValidate(user: Record<string, string>): boolean {
         const senhaValida = user.password === user.password_confirmation;
@@ -457,12 +483,14 @@ document.addEventListener('DOMContentLoaded', function () {
         elements.modal.style.display = 'none';
         elements.carrinhoContainer.style.display ='none'
         elements.painelAdmin.style.display = 'none';
+        elements.meusEmprestimos.style.display = 'none';
     }
     async function loadMeusProdutos() {
         elements.updateFormContainer.style.display = 'none';
         elements.meusProdutosContainer.style.display = 'block';
         elements.carrinhoContainer.style.display ='none';
         elements.painelAdmin.style.display = 'none';
+        elements.meusEmprestimos.style.display = 'none';
         await carregarProdutosUsuario();
     }
         // Função para mostrar o painel de admin quando o botão for clicado
@@ -473,9 +501,71 @@ document.addEventListener('DOMContentLoaded', function () {
         elements.updateFormContainer.style.display = 'none';
         elements.meusProdutosContainer.style.display = 'none';
         elements.carrinhoContainer.style.display ='none';
+        elements.meusEmprestimos.style.display = 'none';
+        
 
         // Carregar os usuários quando o painel for exibido
         carregarUsuariosAdmin();
+    }
+
+
+    async function carregarEmprestimos() {
+        showEmprestimos()
+        try {
+            const { data } = await api.get('/emprestimos', {
+                params: {
+                populate: ['produtos'],
+                filters: {
+                    user:  localStorage.getItem('userId') ,
+                },
+                },
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+            });
+
+        const emprestimos = data.data;
+        console.log(emprestimos);
+        const tbody = document.getElementById('emprestimosList');
+        tbody.innerHTML = '';
+        if (emprestimos.length === 0) {
+            const semEmprestimosHtml = `
+              <tr id="sem-emprestimos">
+                <td colspan="3">Sem Empréstimos</td>
+              </tr>
+            `;
+            tbody.insertAdjacentHTML('beforeend', semEmprestimosHtml);
+          } else {
+            emprestimos.forEach((emprestimo) => {
+                const { id, emprestado, produtos } = emprestimo;
+                const status = emprestado ? 'confirmado' : 'em analise';
+            
+                const produtosHtml = produtos && produtos.length
+                ? produtos.map((produto) => `<li>${produto.nome}</li>`).join('')
+                : '<li>Sem produtos</li>';
+
+                const row = `
+                <tr>
+                    <td>${id}</td>
+                    <td>
+                    <div class="dropdown-container">
+                        <button class="dropdown-btn" onclick="toggleDropdown(${id})">
+                        Ver Produtos (${produtos.length})
+                        </button>
+                        <ul class="dropdown-content" id="dropdown-content-${id}">
+                        ${produtosHtml}
+                        </ul>
+                    </div>
+                    </td>
+                    <td><span class="${getStatusClass(status)}">${status.toUpperCase()}</span></td>
+                </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+          }
+
+        document.getElementById('meus-emprestimos-container').style.display = 'block';
+        } catch (error) {
+        console.error('Erro ao carregar empréstimos:', error);
+        }
     }
 
     function showCarrinho() {
@@ -483,6 +573,7 @@ document.addEventListener('DOMContentLoaded', function () {
         elements.meusProdutosContainer.style.display = 'none';
         elements.modal.style.display = 'none';
         elements.carrinhoContainer.style.display ='block'
+        elements.meusEmprestimos.style.display = 'none';
     }
 
     elements.nomeProduto.addEventListener('blur', () => addPlaceholder(elements.nomeProduto));
@@ -589,6 +680,8 @@ function getElements() {
         esvaziarCarrinhoBtn: document.getElementById('esvaziar-carrinho'),
         solicitarEmprestimoBtn: document.getElementById('solicitar-emprestimo'),
         painelAdmin: document.getElementById('painel-admin-container') as HTMLElement,
+        emprestimo: document.getElementById('emprestimo') as HTMLButtonElement,
+        meusEmprestimos: document.getElementById('meus-emprestimos-container') as HTMLElement,
     };
 }
 
@@ -712,6 +805,41 @@ function atualizarTabelaUsuarios(usuarios: any[]) {
         });
     }
 }
+
+function toggleDropdown(id) {
+    const dropdown = document.getElementById(`dropdown-content-${id}`);
+    dropdown.classList.toggle('show');
+  
+    if (dropdown.classList.contains('show')) {
+      // Reset para garantir a reavaliação
+      dropdown.classList.remove('open-up');
+  
+      const rect = dropdown.getBoundingClientRect();
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  
+      // Se ultrapassar a altura da tela, abre para cima
+      if (rect.bottom > windowHeight) {
+        dropdown.classList.add('open-up');
+      }
+    }
+  }
+  
+  
+
+  function getStatusClass(status) {
+    switch (status) {
+      case 'confirmado':
+        return 'status-confirmado';
+      case 'recusado':
+        return 'status-recusado';
+      case 'analise':
+      default:
+        return 'status-analise';
+    }
+  }
+
+
+
 
 
 
