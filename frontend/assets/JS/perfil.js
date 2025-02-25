@@ -332,6 +332,11 @@ document.addEventListener('DOMContentLoaded', function () {
     async function criarEmprestimo() {
         try {
             const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+            if (!Array.isArray(carrinho) || carrinho.length === 0) {
+                alert('O carrinho está vazio. Adicione produtos antes de criar um empréstimo.');
+                console.log('Requisição cancelada: carrinho vazio');
+                throw new Error('Carrinho vazio - requisição cancelada');
+            }
             const produtosIds = carrinho.map((produto) => produto.documentId);
             const novoEmprestimo = {
                 data: {
@@ -345,12 +350,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            console.log('Empréstimo criado:', response.data);
+            console.log('📦 Empréstimo criado:', response.data);
             localStorage.removeItem('carrinho');
             updateCarrinhoList();
         }
         catch (error) {
-            console.error('Erro ao criar empréstimo:', error);
+            console.error('❌ Erro ao criar empréstimo:', error);
         }
     }
     async function updateUser(nome, sobrenome, password, userId, token) {

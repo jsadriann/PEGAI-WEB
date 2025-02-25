@@ -381,7 +381,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function criarEmprestimo() {
         try {
+      
           const carrinho = JSON.parse(localStorage.getItem('carrinho') as string) || [];
+      
+          if (!Array.isArray(carrinho) || carrinho.length === 0) {
+            alert('O carrinho está vazio. Adicione produtos antes de criar um empréstimo.');
+            console.log('Requisição cancelada: carrinho vazio');
+            throw new Error('Carrinho vazio - requisição cancelada');
+          }
+          
           const produtosIds = carrinho.map((produto: any) => produto.documentId);
       
           const novoEmprestimo = {
@@ -392,19 +400,19 @@ document.addEventListener('DOMContentLoaded', function () {
             },
           };
       
-          const response = await api.post('/emprestimos', novoEmprestimo,{
+          const response = await api.post('/emprestimos', novoEmprestimo, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
           });
-          console.log('Empréstimo criado:', response.data);
+          console.log('📦 Empréstimo criado:', response.data);
           localStorage.removeItem('carrinho');
           updateCarrinhoList();
         } catch (error) {
-          console.error('Erro ao criar empréstimo:', error);
+          console.error('❌ Erro ao criar empréstimo:', error);
         }
       }
-
+      
 
 
     async function updateUser(
